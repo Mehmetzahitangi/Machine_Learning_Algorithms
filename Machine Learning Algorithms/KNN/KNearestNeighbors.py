@@ -34,8 +34,7 @@ class KNearestNeighbor:
                     
                 distances[i, j] = (summ)**(1/self.p_value)
                 
-                # (Taking sqrt is not necessary: min distance won't change since sqrt is monotone)
-                #distances[i, j] = np.sqrt( self.eps + np.sum((X_test[i, :] - self.X_train[j, :]) ** 2) )
+
         return distances
     
     def predict(self, X_test):
@@ -49,7 +48,7 @@ class KNearestNeighbor:
         as a way of understanding what kNN is doing
         """
 
-        num_feature = dataset.shape[1] # self.X.shape[1] de kullanılabilir.
+        num_feature = dataset.shape[1] 
         num_data_row = dataset.shape[0]
         num_data_row_trainX = self.X_train.shape[0]
         #num_train = self.X_train.shape[0]
@@ -66,8 +65,7 @@ class KNearestNeighbor:
                     
                 distances[i, j] = (summ)**(1/self.p_value)
                 
-                # (Taking sqrt is not necessary: min distance won't change since sqrt is monotone)
-                #distances[i, j] = np.sqrt( self.eps + np.sum((X_test[i, :] - self.X_train[j, :]) ** 2) )
+
                 
         results = self.predict_labels(distances)
         return results
@@ -84,9 +82,8 @@ class KNearestNeighbor:
             if self.kind == "classification":
                 unique, counts = np.unique(k_closest_classes, return_counts=True)
                 outputs_numbers = dict(zip(unique, counts))
-                y_pred[i] =  max(k_closest_classes, key=outputs_numbers.get) #max(k_closest_classes, key= lambda x: k_closest_classes[x]) 
-                #uniques = np.unique[self.y_train]
-                #y_pred[i] = np.argmax(np.bincount(k_closest_classes))
+                y_pred[i] =  max(k_closest_classes, key=outputs_numbers.get)
+
             
             if self.kind == "regression":
                 y_pred[i] = sum(k_closest_classes)/len(k_closest_classes)
@@ -101,11 +98,8 @@ class KNearestNeighbor:
 
 
 
-#%%
-if __name__ == "__main__":
-    #X = np.loadtxt("example_data/data.txt", delimiter=",")
-   # y = np.loadtxt("example_data/targets.txt")
 
+if __name__ == "__main__":
     X = np.array([[1, 1], [3, 1], [2, 3], [4, 5], [6, 6], [7, 1]])
     y = np.array([0, 0, 0, 1, 1, 1])
 
@@ -116,4 +110,4 @@ if __name__ == "__main__":
     KNN = KNearestNeighbor(k=3)
     deneme = KNN.train(X, y, p_value=3,kind="classification")
     y_pred = KNN.predict(X_test)
-    #print(f"Accuracy: {sum(y_pred == y) / y.shape[0]}")
+    print(f"Accuracy: {sum(y_pred == y) / y.shape[0]}")
