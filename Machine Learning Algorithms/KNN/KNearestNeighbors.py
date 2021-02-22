@@ -13,10 +13,7 @@ class KNearestNeighbor:
         return self.compute_distance(X)
     
     def compute_distance(self, dataset):
-        """
-        Inefficient naive implementation, use only
-        as a way of understanding what kNN is doing
-        """
+
 
         num_feature = dataset.shape[1]
         num_data_row = dataset.shape[0]
@@ -43,10 +40,8 @@ class KNearestNeighbor:
         return distances
     
     def compute_distance_test(self, dataset):
-        """
-        Inefficient naive implementation, use only
-        as a way of understanding what kNN is doing
-        """
+       
+
 
         num_feature = dataset.shape[1] 
         num_data_row = dataset.shape[0]
